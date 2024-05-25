@@ -1,10 +1,5 @@
 pipeline {
-    agent {
-        docker {
-            image 'maven:3.8.5-jdk-11' // Ensure the Maven image has JDK 11 to match your project requirements
-            args '-v /var/run/docker.sock:/var/run/docker.sock' // Optional: only if you need to run Docker inside Docker
-        }
-    }
+    
     stages {
         stage('Checkout') {
             steps {
