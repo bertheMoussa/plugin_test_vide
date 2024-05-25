@@ -38,6 +38,15 @@ pipeline {
                 }
             }
         }
+
+        stage('Run') {
+            steps {
+                script {
+                    // Run the main class
+                    sh 'mvn exec:java -Dexec.mainClass="plugin_test.InefficientSort.java"'
+                }
+            }
+        }
         
         stage('Deploy') {
             steps {
