@@ -127,8 +127,15 @@
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>exec-maven-plugin</artifactId>
             <version>3.1.1</version>
+            <executions>
+                <execution>
+                    <goals>
+                        <goal>java</goal>
+                    </goals>
+                </execution>
+            </executions>
             <configuration>
-                <mainClass>plugin_test.InefficientSort.java</mainClass>
+                <mainClass>plugin_test.InefficientSort</mainClass>
             </configuration>
         </plugin>
       </plugins>
