@@ -1,0 +1,46 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                git url: 'https://github.com/Pyked/plugin_test0.git', branch: 'main'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    // Run Maven build
+                    sh 'mvn clean install'
+                }
+            }
+        }
+        stage('Package') {
+            steps {
+                script {
+                    // Package the application
+                    sh 'mvn package'
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                script {
+                    // Placeholder for deployment step
+                    echo 'Deploying application...'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Build, test, and package completed successfully.'
+        }
+        failure {
+            echo 'Build, test, or package failed.'
+        }
+    }
+}
