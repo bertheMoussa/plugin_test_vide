@@ -5,44 +5,56 @@ pipeline {
             args '-v /var/run/docker.sock:/var/run/docker.sock' // Optional: only if you need to run Docker inside Docker
         }
     }
-    environment {
-        GIT_URL = 'https://github.com/bertheMoussa/plugin_test_vide.git'
-    }
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'plugin_test_vide', url: env.GIT_URL
+                git url: 'https://github.com/bertheMoussa/plugin_test_vide.git', branch: 'plugin_test_vide'
             }
         }
+
         stage('Build') {
             steps {
-                sh 'mvn clean install'
+                script {
+                    // Run Maven build
+                    sh 'mvn clean install'
+                }
             }
         }
+
         stage('Test') {
             steps {
-                sh 'mvn test'
+                script {
+                    // Run Maven tests
+                    sh 'mvn test'
+                }
             }
         }
+
         stage('Package') {
             steps {
-                sh 'mvn package'
+                script {
+                    // Package the application
+                    sh 'mvn package'
+                }
+            }
+        }
+        
+        stage('Deploy') {
+            steps {
+                script {
+                    // Placeholder for deployment step
+                    echo 'Deploying application...'
+                }
             }
         }
     }
+
     post {
         success {
-            echo 'Pipeline completed successfully!'
+            echo 'Build, test, and package completed successfully.'
         }
         failure {
-            echo 'Pipeline failed!'
-        }
-        cleanup {
-            script {
-                def containerName = "my-app-container"
-                sh "docker stop ${containerName} || true"
-                sh "docker rm ${containerName} || true"
-            }
+            echo 'Build, test, or package failed.'
         }
     }
 }
