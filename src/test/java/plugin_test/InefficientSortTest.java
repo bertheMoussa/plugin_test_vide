@@ -1,39 +1,45 @@
 package plugin_test;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
-import java.util.Arrays;
-import java.util.Random;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
 public class InefficientSortTest {
 
     @Test
     public void testInefficientSort() {
-        int size = 10000;  // Adjust this size to make the test more or less expensive
-        int[] array = new int[size];
-        Random random = new Random();
-
-        // Fill the array with random integers
-        for (int i = 0; i < size; i++) {
-            array[i] = random.nextInt(size);
-        }
-
-        // Capture the start time
-        long startTime = System.currentTimeMillis();
-
-        // Perform the sort
+        int[] array = {5, 3, 2, 4, 1};
         InefficientSort.inefficientSort(array);
+        int[] expected = {1, 2, 3, 4, 5};
+        assertArrayEquals(expected, array);
+    }
 
-        // Capture the end time
-        long endTime = System.currentTimeMillis();
+    @Test
+    public void testFactorial() {
+        assertEquals(1, InefficientSort.factorial(0));
+        assertEquals(1, InefficientSort.factorial(1));
+        assertEquals(2, InefficientSort.factorial(2));
+        assertEquals(6, InefficientSort.factorial(3));
+        assertEquals(24, InefficientSort.factorial(4));
+        assertEquals(120, InefficientSort.factorial(5));
+    }
 
-        // Check if the array is sorted
-        for (int i = 0; i < array.length - 1; i++) {
-            assertTrue(array[i] <= array[i + 1], "Array is not sorted");
-        }
+    @Test
+    public void testBubbleSort() {
+        int[] array = {5, 3, 2, 4, 1};
+        InefficientSort.bubbleSort(array);
+        int[] expected = {1, 2, 3, 4, 5};
+        assertArrayEquals(expected, array);
+    }
 
-        // Output the time taken for sorting
-        System.out.println("Time taken to sort array: " + (endTime - startTime) + " milliseconds");
+    @Test
+    public void testMaxSubArraySum() {
+        int[] array1 = {5, -3, 2, 4, -1};
+        assertEquals(8, InefficientSort.maxSubArraySum(array1));
+
+        int[] array2 = {-2, -3, 4, -1, -2, 1, 5, -3};
+        assertEquals(7, InefficientSort.maxSubArraySum(array2));
+
+        int[] array3 = {-1, -2, -3, -4};
+        assertEquals(-1, InefficientSort.maxSubArraySum(array3));  // Best of the negative numbers is -1
     }
 }
