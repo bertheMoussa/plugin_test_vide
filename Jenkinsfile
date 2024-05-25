@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git branch: 'main', url: env.GIT_URL
+                git branch: 'plugin_test_vide', url: env.GIT_URL
             }
         }
         stage('Build') {
