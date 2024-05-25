@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/bertheMoussa/plugin_test_vide.git', branch: 'plugin_test_vide'
+                git url: 'https://github.com/bertheMoussa/plugin_test_vide.git', branch: 'plugin_test_plein'
             }
         }
 
